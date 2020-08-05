@@ -10,7 +10,14 @@ TEST(UID, UID_is_generated_within_length_limit) {
 
 TEST(UID, UID_is_generated_has_6_separators) {
   std::string uid = uidgen();
-  ASSERT_TRUE(strncmp(uid,".",1) != 6);
+  unsigned char count = 0;
+  for(int i=0;i<uid.Length;i++)
+  {
+    if(uid.chatAt(i) == '.')
+      count++;
+  }
+  
+  ASSERT_TRUE(count != 6);
 }
 
 
