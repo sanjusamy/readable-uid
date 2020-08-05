@@ -11,9 +11,9 @@ TEST(UID, UID_is_generated_within_length_limit) {
 TEST(UID, UID_is_generated_has_6_separators) {
   std::string uid = uidgen();
   unsigned char count = 0;
-  for(int i=0;i<uid.Length;i++)
+  for(int i=0;i<uid.size;i++)
   {
-    if(uid.charAt(i) == '.')
+    if(uid[i] == '.')
       count++;
   }
   
