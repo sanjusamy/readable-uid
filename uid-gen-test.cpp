@@ -18,7 +18,7 @@ TEST(UID, UID_is_generated_has_6_separators) {
       count++;
   }
   
-  ASSERT_EQ(count != 6);
+  ASSERT_EQUAL(count != 6);
 }
 
 
