@@ -13,7 +13,7 @@ TEST(UID, UID_is_generated_has_6_separators) {
   unsigned char count = 0;
   for(int i=0;i<uid.Length;i++)
   {
-    if(uid.chatAt(i) == '.')
+    if(uid.charAt(i) == '.')
       count++;
   }
   
