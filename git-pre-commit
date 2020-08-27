@@ -1,0 +1,36 @@
+if [ ! -z "$NO_FORMAT_CHECK" ]
+then
+    exit 0
+fi
+
+if git rev-parse --verify HEAD >/dev/null 2>&1
+then
+    against=HEAD
+else
+    # Initial commit: diff against an empty tree object
+    against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+fi
+
+# Redirect output to stderr.
+exec 1>&2
+
+copyright_mode=`git config hooks.copyrightmode`
+
+if [ -z "$copyright_mode" ]
+then
+    copyright_mode=off
+fi
+
+if [[ -f admin/copyright.sh && \
+      ( "$copyright_mode" != "off" ) ]]
+then
+    admin/copyright.sh check-index --rev=$against \
+        --copyright="$copyright_mode"
+    stat=$?
+    if [ $stat -eq 1 ] ; then
+        exit 1
+    elif [ $stat -ne 0 ] ; then
+        echo "Copyright information check failed"
+        exit 1
+    fi
+fi
